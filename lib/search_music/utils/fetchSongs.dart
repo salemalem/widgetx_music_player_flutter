@@ -26,8 +26,16 @@ Future<List<List<String>>> fetchSongs(url)  async {
 
     if (songArtistsFromResponse.length > 0) {
       for (var i = 0; i < songNamesFromResponse.length; i++) {
-        songNames.add(songNamesFromResponse[i].text.trimLeft().trimRight());
-        songArtists.add(songArtistsFromResponse[i].text.trimLeft().trimRight());
+        if (songNamesFromResponse[i].text.trimLeft().trimRight().length > 40) {
+          songNames.add(songNamesFromResponse[i].text.trimLeft().trimRight().substring(0, 40) + "...");
+        } else {
+          songNames.add(songNamesFromResponse[i].text.trimLeft().trimRight());
+        }
+        if (songArtistsFromResponse[i].text.trimLeft().trimRight().length > 40) {
+          songArtists.add(songArtistsFromResponse[i].text.trimLeft().trimRight().substring(0, 40) + "...");
+        } else {
+          songArtists.add(songArtistsFromResponse[i].text.trimLeft().trimRight());
+        }
         songDurations.add(
             songDurationsFromResponse[i].text.trimLeft().trimRight());
         songLinks.add(songLinksFromResponse[i].attributes['href']);

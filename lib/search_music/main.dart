@@ -13,7 +13,7 @@ var songsNamesList = [];
 var songsArtistsList = [];
 var songsLinksList = [];
 var songImagesList = [];
-var songDurationsList = [];
+var songsDurationsList = [];
 
 class SearchMusic extends StatefulWidget {
   @override
@@ -80,12 +80,12 @@ class _SearchMusicState extends State<SearchMusic> {
                   songsArtistsList = val[2];
                   songsLinksList = val[4];
                   songImagesList = val[0];
-                  songDurationsList = val[3];
+                  songsDurationsList = val[3];
                 } else {
                   songsNamesList = ['Іздегеніңіз Табылмады'];
                   songsArtistsList = ['Басқаша іздеп көріңіз'];
                   songsLinksList = [''];
-                  songDurationsList = [''];
+                  songsDurationsList = [''];
                   songImagesList = ['https://png.icons8.com/windows/1600/0063B1/nothing-found'];
                 }
               }));
@@ -101,8 +101,12 @@ class _SearchMusicState extends State<SearchMusic> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(songsNamesList[index]),
-                      Text(songDurationsList[index]),
+                      Text(
+                        songsNamesList[index]
+                      ),
+                      Text(
+                          songsDurationsList[index]
+                      ),
                     ],
                   ),
                   subtitle: Text(songsArtistsList[index]),
@@ -111,10 +115,13 @@ class _SearchMusicState extends State<SearchMusic> {
                     icon: Icon(Icons.file_download),
                     onPressed: () async {
                       // download pressed
-                      Scaffold.of(context).showSnackBar(downloadingSnackBar);
                       if (songsLinksList[index] != '') {
-                        String filename = songsNamesList[index] + " - " +
-                            songsArtistsList[index];
+                        Scaffold.of(context).showSnackBar(downloadingSnackBar);
+                        String filename =
+                          songsNamesList[index] +
+                          " - " +
+                          songsArtistsList[index] +
+                          songsDurationsList[index];
 //                      downloadMp3FromUrl(songsLinksList[index], filename);
                         var dir = await getExternalStorageDirectory();
                         filename = dir.path + "/" + filename + ".mp3";
@@ -125,10 +132,7 @@ class _SearchMusicState extends State<SearchMusic> {
                       }
                     },
                   ),
-
-                  onTap: () {
-
-                  },
+                  onTap: () {},
                 );
               },
               itemCount: songsNamesList.length,
