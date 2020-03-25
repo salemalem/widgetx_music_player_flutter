@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:music_player_flutter/search_music/utils/convertToHexColor.dart';
 
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
@@ -185,9 +186,12 @@ class _LocalMusicListState extends State<LocalMusicList> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            "WidgetX Музыка Ойнатқышы"
+            "WidgetX Музыка Ойнатқышы",
+            style: TextStyle(
+                color: Colors.white70
+            )
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: HexColor("#121212"),
       ),
       body: localSongsNames.isNotEmpty
           ? Column(
@@ -326,6 +330,7 @@ class _LocalMusicListState extends State<LocalMusicList> {
         ],
       )
           : Container(
+        color: HexColor('#121212'),
         child: Center(
           child: Text(
             '0 songs',
