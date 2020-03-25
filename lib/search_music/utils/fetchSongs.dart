@@ -26,13 +26,13 @@ Future<List<List<String>>> fetchSongs(url)  async {
 
     if (songArtistsFromResponse.length > 0) {
       for (var i = 0; i < songNamesFromResponse.length; i++) {
-        if (songNamesFromResponse[i].text.trimLeft().trimRight().length > 40) {
-          songNames.add(songNamesFromResponse[i].text.trimLeft().trimRight().substring(0, 40) + "...");
+        if (songNamesFromResponse[i].text.trimLeft().trimRight().length > 35) {
+          songNames.add(songNamesFromResponse[i].text.trimLeft().trimRight().substring(0, 35) + "...");
         } else {
           songNames.add(songNamesFromResponse[i].text.trimLeft().trimRight());
         }
-        if (songArtistsFromResponse[i].text.trimLeft().trimRight().length > 40) {
-          songArtists.add(songArtistsFromResponse[i].text.trimLeft().trimRight().substring(0, 40) + "...");
+        if (songArtistsFromResponse[i].text.trimLeft().trimRight().length > 35) {
+          songArtists.add(songArtistsFromResponse[i].text.trimLeft().trimRight().substring(0, 35) + "...");
         } else {
           songArtists.add(songArtistsFromResponse[i].text.trimLeft().trimRight());
         }

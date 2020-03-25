@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:music_player_flutter/search_music/utils/convertToHexColor.dart';
 
 import 'package:path_provider/path_provider.dart';
 
@@ -14,6 +15,10 @@ var songsArtistsList = [];
 var songsLinksList = [];
 var songImagesList = [];
 var songsDurationsList = [];
+
+var listTileTextStyle = TextStyle(
+  color: Colors.green[200]
+);
 
 class SearchMusic extends StatefulWidget {
   @override
@@ -50,11 +55,15 @@ class _SearchMusicState extends State<SearchMusic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HexColor('#121212'),
       appBar: AppBar(
         title: Text(
           'WidgetX Музыка Ойнатқышы',
+          style: TextStyle(
+            color: Colors.white70
+          ),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: HexColor("#121212"),
       ),
       body: Column(
         children: <Widget>[
@@ -62,8 +71,16 @@ class _SearchMusicState extends State<SearchMusic> {
             controller: _searchMusicController,
             decoration: InputDecoration(
               hintText: 'Іздеу',
+              hintStyle: TextStyle(
+                color: Colors.green[200]
+              ),
+              filled: true,
+              fillColor: Colors.white10,
               suffix: IconButton(
-                  icon: Icon(Icons.close),
+                  icon: Icon(
+                    Icons.close,
+                    color: Colors.purple[200],
+                  ),
                   onPressed: () {
                     // clear query text
                     WidgetsBinding.instance.addPostFrameCallback((_) => _searchMusicController.clear());
@@ -102,17 +119,27 @@ class _SearchMusicState extends State<SearchMusic> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        songsNamesList[index]
+                        songsNamesList[index],
+                        style: listTileTextStyle,
                       ),
                       Text(
-                          songsDurationsList[index]
+                        songsDurationsList[index],
+                        style: listTileTextStyle,
                       ),
                     ],
                   ),
-                  subtitle: Text(songsArtistsList[index]),
+                  subtitle: Text(
+                    songsArtistsList[index],
+                    style: TextStyle(
+                      color: Colors.green[400]
+                    ),
+                  ),
                   trailing:
                   IconButton(
-                    icon: Icon(Icons.file_download),
+                    icon: Icon(
+                      Icons.file_download,
+                      color: Colors.white70,
+                    ),
                     onPressed: () async {
                       // download pressed
                       if (songsLinksList[index] != '') {

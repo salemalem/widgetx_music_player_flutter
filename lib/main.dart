@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // for curved navigation bar
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:music_player_flutter/search_music/utils/convertToHexColor.dart';
 
 // search_music
 import 'search_music/main.dart';
@@ -49,7 +50,7 @@ class _CurvedBottomNavigationBarState extends State<CurvedBottomNavigationBar> {
         ],
         color: Colors.black,
         buttonBackgroundColor: Colors.green[500],
-        backgroundColor: Colors.grey[900],
+        backgroundColor: HexColor('#121212'),
         animationCurve: Curves.easeOut,
         animationDuration: Duration(milliseconds: 300),
         onTap: (index) {
