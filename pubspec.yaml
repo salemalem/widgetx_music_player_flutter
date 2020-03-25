@@ -36,8 +36,14 @@ dependencies:
 
   # path provider
   path_provider: ^1.6.1
-  ### end for search music ###
+  ### end for search_music ###
 
+  ### for downloaded_music ###
+  audioplayers: ^0.14.2
+
+  flutter_seekbar:
+    git: https://github.com/LiuC520/flutter_seekbar.git
+  ### end for downloaded_music ###
 dev_dependencies:
   flutter_test:
     sdk: flutter

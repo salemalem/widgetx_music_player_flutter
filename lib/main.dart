@@ -1,13 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 // for curved navigation bar
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:music_player_flutter/search_music/utils/convertToHexColor.dart';
 
 // search_music
+import 'downloaded_music/LocalMusicList.dart';
 import 'search_music/main.dart';
+import 'package:music_player_flutter/search_music/utils/convertToHexColor.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  localMusicListMain();
+
   runApp(
     MaterialApp(
       home: CurvedBottomNavigationBar(),
@@ -64,12 +74,15 @@ class _CurvedBottomNavigationBarState extends State<CurvedBottomNavigationBar> {
   }
 }
 
+SearchMusic searchMusic = SearchMusic();
+LocalMusicList localMusicList = LocalMusicList();
+
 swapBodyWidget(page) {
   var widget;
   if (page == 0) {
-    widget = SearchMusic();
-  } else {
-//    return Page2();
+    widget = searchMusic;
+  } else if (page == 1) {
+    widget = localMusicList;
   }
   return widget;
 }

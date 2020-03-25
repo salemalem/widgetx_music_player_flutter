@@ -148,6 +148,7 @@ class _SearchMusicState extends State<SearchMusic> {
                           songsNamesList[index] +
                           " - " +
                           songsArtistsList[index] +
+                          " - " +
                           songsDurationsList[index];
 //                      downloadMp3FromUrl(songsLinksList[index], filename);
                         var dir = await getExternalStorageDirectory();
