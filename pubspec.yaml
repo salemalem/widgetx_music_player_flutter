@@ -27,6 +27,17 @@ dependencies:
   # for curved navigation bar
   curved_navigation_bar: ^0.3.2
 
+  ### for search_music ###
+  # to fetch data from the internet
+  http: ^0.12.0+4
+
+  # to extract data from fetched data
+  html: ^0.14.0+3
+
+  # path provider
+  path_provider: ^1.6.1
+  ### end for search music ###
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
