@@ -69,6 +69,9 @@ class _SearchMusicState extends State<SearchMusic> {
         children: <Widget>[
           TextField(
             controller: _searchMusicController,
+            style: TextStyle(
+              color: Colors.pink[200]
+            ),
             decoration: InputDecoration(
               hintText: 'Іздеу',
               hintStyle: TextStyle(
@@ -143,13 +146,16 @@ class _SearchMusicState extends State<SearchMusic> {
                     onPressed: () async {
                       // download pressed
                       if (songsLinksList[index] != '') {
+                        var durSplitted = songsDurationsList[index].split(":");
                         Scaffold.of(context).showSnackBar(downloadingSnackBar);
                         String filename =
                           songsNamesList[index] +
                           " - " +
                           songsArtistsList[index] +
                           " - " +
-                          songsDurationsList[index];
+                          durSplitted[0] +
+                          " - " +
+                          durSplitted[1];
 //                      downloadMp3FromUrl(songsLinksList[index], filename);
                         var dir = await getExternalStorageDirectory();
                         filename = dir.path + "/" + filename + ".mp3";

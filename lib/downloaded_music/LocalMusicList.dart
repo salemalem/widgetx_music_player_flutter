@@ -185,161 +185,213 @@ class _LocalMusicListState extends State<LocalMusicList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            "WidgetX Музыка Ойнатқышы",
-            style: TextStyle(
-                color: Colors.white70
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+                "WidgetX Музыка Ойнатқышы",
+                style: TextStyle(
+                    color: Colors.white70
+                )
+            ),
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                getSongs().then((val) {
+                  setState(() {
+                    localSongsPaths = val[0];
+                    localSongsNames = val[1];
+                    localSongsArtists = val[2];
+                    localSongDurations = val[3];
+                    durationOfflineString = localSongDurations[_currentIndex];
+                    _maxIndex = localSongsNames.length - 1;
+                  });
+                });
+              },
             )
+          ],
         ),
-        backgroundColor: HexColor("#121212"),
+        backgroundColor: Colors.black,
       ),
       body: localSongsNames.isNotEmpty
-          ? Column(
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: _currentIndex == index
-                      ? Icon(Icons.arrow_forward_ios)
-                      : Text(''),
-                  title: Text(
-                      localSongsNames[index]
-                  ),
-                  subtitle: Text(
-                      localSongsArtists[index]
-                  ),
-                    trailing: Text(
-                      localSongDurations[index]
-                    ),
-                  onTap: () {
-                    setState(() {
-                      if (_currentIndex != index) {
-                        stopLocal(audioPlayer);
-                        isPlaying = false;
-                      }
-                      _currentIndex = index;
-                    });
-                    isPlaying ? pauseLocal(audioPlayer) : playLocal(audioPlayer, localSongsPaths[_currentIndex]);
-                  },
-                );
-              },
-              itemCount: localSongsNames.length,
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.orange[400],
-                border: Border.all(
-                    color: Colors.blueAccent
-                ),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(35.0),
-                  topRight: Radius.circular(35.0),
-                )
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Icon(
-                    Icons.music_note
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                        localSongsNames[_currentIndex]
-                    ),
-                    Text(
-                      localSongsArtists[_currentIndex],
-                      style: TextStyle(
-                          color: Colors.black54
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                          Icons.skip_previous
-                      ),
-                      onPressed: () {
-                        if(_currentIndex == 0) {
-                          setState(() {
-                            _currentIndex = _maxIndex;
-                          });
-                        } else {
-                          setState(() {
-                            _currentIndex--;
-                          });
-                          playLocal(audioPlayer, localSongsPaths[_currentIndex]);
-                        }
-                      },
-                    ),
-                    IconButton(
-                      icon: isPlaying
-                          ? Icon(Icons.pause)
-                          : Icon(Icons.play_arrow),
-                      onPressed: () {
-                        isPlaying
-                            ? pauseLocal(audioPlayer)
-                            : playLocal(audioPlayer, localSongsPaths[_currentIndex]);
-                        setState(() {
-                          isPlaying = !isPlaying;
-                        });
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.skip_next),
-                      onPressed: () {
-                        if(_currentIndex == _maxIndex) {
-                          setState(() {
-                            _currentIndex = 0;
-                          });
-                        } else {
-                          setState(() {
-                            _currentIndex++;
-                          });
-                        }
-                        playLocal(audioPlayer, localSongsPaths[_currentIndex]);
-                      },
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          Column(
+        ? Container(
+        color: HexColor("#121212"),
+          child: Column(
             children: <Widget>[
-              SeekBar(
-                progresseight: 10,
-                value: posInt*100,
-                onValueChanged: (progressValue) {
-                  seekLocal(audioPlayer, progressToMilliseconds(progressValue.progress));
-                },
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                    positionOfflineString + "/" + durationOfflineString
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: _currentIndex == index
+                          ? Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white70,
+                          )
+                          : Text(''),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            localSongsNames[index],
+                            style: TextStyle(
+                              color: Colors.greenAccent[200]
+                            ),
+                          ),
+                          Text(
+                            localSongDurations[index],
+                            style: TextStyle(
+                              color: Colors.greenAccent[200]
+                            ),
+                          ),
+                        ],
+                      ),
+                      subtitle: Text(
+                          localSongsArtists[index],
+                          style: TextStyle(
+                              color: Colors.lightGreenAccent[200]
+                          ),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.expand_more,
+                          color: Colors.pinkAccent[200],
+                        ),
+                        onPressed: () {
+                          // expand settings
+                        },
+                      ),
+                      onTap: () {
+                        setState(() {
+                          if (_currentIndex != index) {
+                            stopLocal(audioPlayer);
+                            isPlaying = false;
+                          }
+                          _currentIndex = index;
+                        });
+                        isPlaying ? pauseLocal(audioPlayer) : playLocal(audioPlayer, localSongsPaths[_currentIndex]);
+                      },
+                    );
+                  },
+                  itemCount: localSongsNames.length,
                 ),
               ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.orange[900],
+                    border: Border.all(
+                        color: Colors.blueAccent
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(35.0),
+                      topRight: Radius.circular(35.0),
+                    )
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(
+                        Icons.music_note
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                            localSongsNames[_currentIndex]
+                        ),
+                        Text(
+                          localSongsArtists[_currentIndex],
+                          style: TextStyle(
+                              color: Colors.black54
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                              Icons.skip_previous
+                          ),
+                          onPressed: () {
+                            if(_currentIndex == 0) {
+                              setState(() {
+                                _currentIndex = _maxIndex;
+                              });
+                            } else {
+                              setState(() {
+                                _currentIndex--;
+                              });
+                              playLocal(audioPlayer, localSongsPaths[_currentIndex]);
+                            }
+                          },
+                        ),
+                        IconButton(
+                          icon: isPlaying
+                              ? Icon(Icons.pause)
+                              : Icon(Icons.play_arrow),
+                          onPressed: () {
+                            isPlaying
+                                ? pauseLocal(audioPlayer)
+                                : playLocal(audioPlayer, localSongsPaths[_currentIndex]);
+                            setState(() {
+                              isPlaying = !isPlaying;
+                            });
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.skip_next),
+                          onPressed: () {
+                            if(_currentIndex == _maxIndex) {
+                              setState(() {
+                                _currentIndex = 0;
+                              });
+                            } else {
+                              setState(() {
+                                _currentIndex++;
+                              });
+                            }
+                            playLocal(audioPlayer, localSongsPaths[_currentIndex]);
+                          },
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Column(
+                children: <Widget>[
+                  SeekBar(
+                    progresseight: 10,
+                    value: posInt*100,
+                    onValueChanged: (progressValue) {
+                      seekLocal(audioPlayer, progressToMilliseconds(progressValue.progress));
+                    },
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      positionOfflineString + "/" + durationOfflineString,
+                      style: TextStyle(
+                        color: Colors.amberAccent[200]
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
-          )
-        ],
-      )
-          : Container(
-        color: HexColor('#121212'),
-        child: Center(
-          child: Text(
-            '0 songs',
-            style: TextStyle(
-                fontSize: 24
+          ),
+        )
+        : Container(
+          color: HexColor('#121212'),
+          child: Center(
+            child: Text(
+              '0 songs',
+              style: TextStyle(
+                  fontSize: 24
+              ),
             ),
           ),
         ),
-      ),
     );
   }
 }

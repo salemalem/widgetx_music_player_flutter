@@ -83,6 +83,21 @@ swapBodyWidget(page) {
     widget = searchMusic;
   } else if (page == 1) {
     widget = localMusicList;
+  } else if (page == 2) {
+    widget = UnderConstruction();
   }
   return widget;
+}
+
+class UnderConstruction extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(
+          'Under Construction'
+        ),
+      ),
+    );
+  }
 }
