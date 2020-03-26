@@ -394,4 +394,13 @@ class _LocalMusicListState extends State<LocalMusicList> {
         ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    _positionSubscription.cancel();
+    _durationSubscription.cancel();
+  }
 }
