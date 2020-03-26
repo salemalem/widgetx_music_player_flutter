@@ -1,4 +1,4 @@
-# music_player_flutter
+# WidgetX Music Player
 
 Music Player by WidgetX which allows you to download and listen to music for free.
 
