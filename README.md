@@ -2,6 +2,12 @@
 
 Music Player by WidgetX which allows you to download and listen to music for free.
 
+## Screenshots
+
+![First Page | Search](https://user-images.githubusercontent.com/42411937/77893460-c17b5380-7295-11ea-88b7-86b0494de79f.jpeg)
+![Second Page | Downloaded](https://user-images.githubusercontent.com/42411937/77893677-069f8580-7296-11ea-975f-2f554c6166bd.jpeg)
+![Third Page | Support](https://user-images.githubusercontent.com/42411937/77893718-18812880-7296-11ea-96db-4b244b8f43e8.jpeg)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
