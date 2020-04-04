@@ -2,6 +2,8 @@
 
 Music Player by WidgetX which allows you to download and listen to music for free.
 
+Link to download for Android: https://play.google.com/store/apps/details?id=com.widgetx.music_player_flutter
+
 ## Screenshots
 
 ![First Page | Search](https://user-images.githubusercontent.com/42411937/77893460-c17b5380-7295-11ea-88b7-86b0494de79f.jpeg)
